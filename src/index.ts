@@ -58,11 +58,11 @@ const sseFetch = async (inUrl: string, inOptions: SseFetchOptions) => {
     const chunk = decoder.decode(value);
 
     SseParser.parse(chunk, {
-      ...parserOptions,
       callback: ({ item }) => {
         const event = new MessageEvent('message', { data: item });
         onMessage?.(event);
       },
+      ...parserOptions,
     });
   }
 };
