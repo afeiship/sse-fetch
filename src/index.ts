@@ -1,6 +1,7 @@
 import SseParser, { SseParserOptions } from '@jswork/sse-parser';
 
 export type SseEvents = {
+  onOpen?: (event: Event) => void;
   onMessage?: (event: MessageEvent) => void;
   onClose?: (event: CloseEvent) => void;
 };
@@ -14,7 +15,7 @@ const defaults: SseFetchOptions = {
 };
 
 const sseFetch = async (inUrl: string, inOptions: SseFetchOptions) => {
-  const { parserOptions, onMessage, onClose, ...options } = { ...defaults, ...inOptions };
+  const { parserOptions, onOpen, onMessage, onClose, ...options } = { ...defaults, ...inOptions };
   const response = await fetch(inUrl, options).catch((error) => {
     throw new Error(`Failed to fetch ${inUrl}: ${error}`);
   });
@@ -26,6 +27,8 @@ const sseFetch = async (inUrl: string, inOptions: SseFetchOptions) => {
   if (!response.body) {
     throw new Error(`Failed to fetch ${inUrl}: response body is empty`);
   }
+
+  onOpen?.(new Event('open'));
 
   const reader = response.body.getReader();
   const decoder = new TextDecoder('utf-8');
