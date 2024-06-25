@@ -16,12 +16,20 @@ npm install @jswork/sse-fetch
 import sseFetch from '@jswork/sse-fetch';
 
 sseFetch('https://example.com/stream', {
+  headers: {
+    'Cache-Control': 'no-cache',
+    'Accept': 'text/event-stream',
+  },
+  body: null,
+  parserOptions: {
+    type: 'prefixedJson',
+  },
   onMessage: function(event) {
     console.log(event.data);
   },
   onClose: function() {
     console.log('close');
-  }
+  },
 });
 ```
 
