@@ -1,6 +1,6 @@
 {
   "name": "@jswork/sse-fetch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Server Sent Event (SSE) streaming via `fetch`.",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
@@ -35,5 +35,10 @@
   },
   "dependencies": {
     "@jswork/sse-parser": "^1.0.9"
-  }
+  },
+  "keywords": [
+    "fetch",
+    "request",
+    "sse"
+  ]
 }
