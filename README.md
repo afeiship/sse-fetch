@@ -16,11 +16,9 @@ npm install @jswork/sse-fetch
 import sseFetch from '@jswork/sse-fetch';
 
 sseFetch('https://example.com/stream', {
-  headers: {
-    'Cache-Control': 'no-cache',
-    'Accept': 'text/event-stream',
-  },
-  body: null,
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ query: 'hello' }),
   parserOptions: {
     type: 'prefixedJson',
   },
